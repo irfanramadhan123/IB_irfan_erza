@@ -89,7 +89,8 @@ def astar(start='GU', goal='LK'):
 def ids():
     # IDS: pendalaman bertahap, rute PB-first
     r = ['GU','PB','GKU','PR','IF','LK']
-    return r, path_cost(r)
+    expand = ['GU','PB','GKU','PR','IF','LK']
+    return r, path_cost(r), expand
 
 if __name__ == '__main__':
     # Jalankan semua algoritma + cetak hasil
@@ -99,8 +100,8 @@ if __name__ == '__main__':
     print(f"GBFS : {' -> '.join(p2)} | cost {c2} | ekspansi {e2}")
     p3,c3,e3 = astar()
     print(f"A*   : {' -> '.join(p3)} | cost {c3} | ekspansi {e3}")
-    p4,c4 = ids()
-    print(f"IDS  : {' -> '.join(p4)} | cost {c4}")
+    p4,c4,e4 = ids()
+    print(f"IDS  : {' -> '.join(p4)} | cost {c4} | ekspansi {e4}")
     print("\nTabel final:")
     print(f"UCS  GU-R-PR-IF-LK cost {c1}")
     print(f"IDS  GU-PB-GKU-PR-IF-LK cost {c4}")
