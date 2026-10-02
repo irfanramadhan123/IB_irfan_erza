@@ -1,7 +1,8 @@
-"""Robot kurir kampus GU -> LK : UCS, IDS, GBFS, A*."""
+#Tugas Kelompok IB
+#Anggota Kelompok: M.Irfan Ramadhan (124140171), Erza Farandi (124140171)
 import heapq
 
-# Graf ketetanggaan: node -> [(tetangga, bobot)]
+#Data GRAF
 GRAPH = {
     'GU': [('PB',3), ('R',4)],
     'PB': [('GU',3), ('GKU',4), ('K',6)],
@@ -17,7 +18,7 @@ GRAPH = {
     'LK': [('A',5), ('IF',3), ('SC',4)],
 }
 
-# Heuristik h(n): perkiraan jarak ke LK
+# Heuristik h(n)
 H = {'GU':12,'PB':10,'R':9,'GKU':7,'PR':6,'K':9,'M':7,'A':4,'AS':5,'IF':2,'SC':3,'LK':0}
 
 def path_cost(path):
