@@ -104,38 +104,4 @@ Khusus IDS:
 
 ---
 
-## 4. Spesifikasi Pengumpulan
-
-- Kelompok maksimal **3 mahasiswa**
-- Solusi dibentuk menggunakan **program sederhana** (bahasa pemrograman bebas dipilih)
-- Pengumpulan dalam bentuk file **PDF** dengan nama:
-  ```
-  TugasKelompok_Rx_nim1_nim2_nim3.pdf
-  ```
-- Isi PDF fokus pada:
-  - Hasil luaran yang diberikan oleh program
-  - Analisis perbandingan dari setiap metode yang digunakan
-- Durasi pengerjaan: **1 minggu** dari diberikannya spesifikasi tugas
-
----
-
-## 5. Rencana Repo
-
-```text
-/
-├── README.md
-├── graph.py / graph.json  # definisi graf + h(n)
-├── ucs.py
-├── ids.py
-├── gbfs.py
-├── astar.py
-└── laporan/               # bahan PDF TugasKelompok_Rx_...
-```
-
-## Referensi Slide
-
-- Slide 33: graf + perintah UCS, IDS, GBFS, A*
-- Slide 34: tabel h(n) + kode simpul
-- Slide 35: spesifikasi kelompok, program, PDF, durasi 1 minggu
-
 Mata kuliah: **Inteligensi Buatan — 2026**
