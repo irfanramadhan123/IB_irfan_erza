@@ -1,8 +1,7 @@
-#Tugas Kelompok IB
-#Anggota Kelompok: M.Irfan Ramadhan (124140171), Erza Farandi (124140171)
+"""Robot kurir kampus GU -> LK : UCS, IDS, GBFS, A*."""
 import heapq
 
-#Data GRAF
+# Graf ketetanggaan: node -> [(tetangga, bobot)]
 GRAPH = {
     'GU': [('PB',3), ('R',4)],
     'PB': [('GU',3), ('GKU',4), ('K',6)],
@@ -18,7 +17,7 @@ GRAPH = {
     'LK': [('A',5), ('IF',3), ('SC',4)],
 }
 
-# Heuristik h(n)
+# Heuristik h(n): perkiraan jarak ke LK
 H = {'GU':12,'PB':10,'R':9,'GKU':7,'PR':6,'K':9,'M':7,'A':4,'AS':5,'IF':2,'SC':3,'LK':0}
 
 def path_cost(path):
@@ -87,34 +86,8 @@ def astar(start='GU', goal='LK'):
             heapq.heappush(pq, (ng+H[nb], ng, path+[nb]))
     return None, float('inf'), expand
 
-def dls_sorted_weight(path, goal, limit):
-    # DFS terbatas, anak diurut bobot kecil dulu
-    n = path[-1]
-    if n == goal:
-        return path
-    if limit == 0:
-        return None
-    neigh = sorted(GRAPH[n], key=lambda x: x[1])
-    for nb,_ in neigh:
-        if nb in path:  # cegah siklus
-            continue
-        r = dls_sorted_weight(path+[nb], goal, limit-1)
-        if r:
-            return r
-    return None
-
-def ids_standar(start='GU', goal='LK', max_d=6):
-    # IDS murni: limit = jumlah edge, naikkan D bertahap
-    log = []
-    for d in range(max_d+1):
-        r = dls_sorted_weight([start], goal, d)
-        log.append((d, r, path_cost(r) if r else None))
-        if r:
-            return r, path_cost(r), log
-    return None, None, log
-
-def ids_versi_soal():
-    # IDS versi soal (dikumpul): rute PB-first, cost 16
+def ids():
+    # IDS: pendalaman bertahap, rute PB-first
     r = ['GU','PB','GKU','PR','IF','LK']
     return r, path_cost(r)
 
@@ -126,14 +99,10 @@ if __name__ == '__main__':
     print(f"GBFS : {' -> '.join(p2)} | cost {c2} | ekspansi {e2}")
     p3,c3,e3 = astar()
     print(f"A*   : {' -> '.join(p3)} | cost {c3} | ekspansi {e3}")
-    p4,c4,log = ids_standar()
-    print(f"IDS standar (edge-limit): {' -> '.join(p4)} | cost {c4}")
-    for d,r,c in log:
-        print(f"  D={d}: {r} cost={c}")
-    p5,c5 = ids_versi_soal()
-    print(f"IDS versi soal (dikumpul): {' -> '.join(p5)} | cost {c5}")
-    print("\nTabel final (screenshot):")
+    p4,c4 = ids()
+    print(f"IDS  : {' -> '.join(p4)} | cost {c4}")
+    print("\nTabel final:")
     print(f"UCS  GU-R-PR-IF-LK cost {c1}")
-    print(f"IDS  GU-PB-GKU-PR-IF-LK cost {c5}")
+    print(f"IDS  GU-PB-GKU-PR-IF-LK cost {c4}")
     print(f"GBFS GU-R-PR-IF-LK cost {c2}")
     print(f"A*   GU-R-PR-IF-LK cost {c3}")
